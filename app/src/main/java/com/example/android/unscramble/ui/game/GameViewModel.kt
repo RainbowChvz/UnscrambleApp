@@ -5,13 +5,9 @@ import androidx.lifecycle.ViewModel
 
 class GameViewModel: ViewModel() {
 
-    init {
-        Log.d("GameFragment", "GameViewModel created")
-    }
-
     private var _score = 0
     private var _currentWordCount = 0
-    private var _currentScrambledWord = "test"
+    private lateinit var _currentScrambledWord: String
 
     val score: Int get() = _score
     val currentWordCount: Int get() = _currentWordCount
@@ -19,6 +15,11 @@ class GameViewModel: ViewModel() {
 
     private var wordsList: MutableList<String> = mutableListOf()
     private lateinit var currentWord: String
+
+    init {
+        Log.d("GameFragment", "GameViewModel created")
+        getNextWord()
+    }
 
     override fun onCleared() {
         super.onCleared()
@@ -36,8 +37,7 @@ class GameViewModel: ViewModel() {
             shuffledWord.shuffle()
         }
 
-
-        if (wordsList.size > 0 && wordsList.contains(currentWord))
+        if (wordsList.contains(currentWord))
             getNextWord()
         else {
             _currentScrambledWord = String(shuffledWord)
