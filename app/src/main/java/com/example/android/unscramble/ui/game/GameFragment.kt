@@ -75,7 +75,16 @@ class GameFragment : Fragment() {
     * Displays the next scrambled word.
     */
     private fun onSubmitWord() {
-
+        if(viewModel.isUserWordCorrect(binding.textInputEditText.text.toString())) {
+            setErrorTextField(false)
+            if (viewModel.nextWord()) {
+                updateNextWordOnScreen()
+            } else {
+                showFinalScoreDialog()
+            }
+        } else {
+            setErrorTextField(true)
+        }
     }
 
     /*
