@@ -133,7 +133,7 @@ class GameFragment : Fragment() {
 
     private fun showFinalScoreDialog() {
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle(R.string.congratulations)
+            .setTitle(getString(R.string.congratulations))
             .setMessage(getString(R.string.score, viewModel.score))
             .setCancelable(false)
             .setNegativeButton(getString(R.string.exit)) { _, _ -> exitGame() }
